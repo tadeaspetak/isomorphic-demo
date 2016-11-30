@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {createMemoryHistory} from 'history';
+import transit from 'transit-immutable-js';
 
 import React from 'react';
 import {renderToString} from 'react-dom/server';
@@ -65,6 +66,10 @@ function renderPage(props, store){
 
         <link rel="icon" type="image/png" href="/media/favicon.ico">
         ${process.env.NODE_ENV === 'prod' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
+
+        <script type="application/javascript">
+          window.state = ${transit.toJSON(store.getState())};
+        </script>
       </head>
       <body>
         <div id="app"><div>${app}</div></div>

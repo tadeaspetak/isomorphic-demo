@@ -1,3 +1,5 @@
+import transit from 'transit-immutable-js';
+
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, browserHistory} from 'react-router';
@@ -17,7 +19,8 @@ require('../shared/styles/screen.scss');
 // media
 require.context('../shared/assets/media', true, /^\.\//);
 
-let store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
+const state = transit.fromJSON(JSON.stringify(window.state));
+let store = applyMiddleware(promiseMiddleware)(createStore)(reducer, state);
 let onUpdate = function onUpdate(){
   //console.log('updating route');
 };
