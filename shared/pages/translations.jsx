@@ -1,11 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {getTranslations, addTranslation, deleteTranslation} from '../actions/translationsActions';
-import Helmet from 'react-helmet';
-import classnames from 'classnames';
-import nprogress from 'nprogress';
 import { OrderedMap } from 'immutable';
 
+import React from 'react';
+import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
+
+import {getTranslations, addTranslation, deleteTranslation} from '../actions/translationsActions';
 import { needs } from '../utils';
 
 @connect(state => ({translations: state.translations}))

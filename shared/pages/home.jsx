@@ -1,6 +1,3 @@
-import classnames from 'classnames';
-import nprogress from 'nprogress';
-
 import React from 'react';
 import Helmet from 'react-helmet';
 
