@@ -1,9 +1,49 @@
 import {Router} from 'express';
+import {createMemoryHistory} from 'history';
+
+import React from 'react';
+import {renderToString} from 'react-dom/server';
+import {match, RouterContext} from 'react-router';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+import {promiseMiddleware} from '../../shared/utils';
+import routes from '../../shared/routes';
+import reducer from '../../shared/reducers';
 
 export default function(){
   let front = new Router();
 
   front.get('/*', (req, res) => {
+    const history = createMemoryHistory(req.url);
+    const store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
+
+    match({routes, location: req.url, history}, (err, redirect, props) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).end('Internal server error');
+      }
+
+      if (!props) {
+        return res.status(404).end('Not found');
+      }
+
+      renderPage(props, store)
+        .then(html => res.type('html').send(html))
+        .catch(error => {
+          console.log(error);
+          res.end(`There has been an error, sorry 'bout that!`);
+        });
+    });
+  });
+
+  return front;
+}
+
+
+function renderPage(props, store){
+  return new Promise((resolve, reject) => {
+    let app = renderToString((<Provider store={store}><RouterContext {...props}/></Provider>));
     let html = `<!doctype html>
     <html>
       <head>
@@ -21,13 +61,11 @@ export default function(){
         ${process.env.NODE_ENV === 'prod' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
       </head>
       <body>
-        <div id="app"><div></div></div>
+        <div id="app"><div>${app}</div></div>
         <script src="/bundle.js"></script>
       </body>
-    </html>`;
+  </html>`;
 
-    res.type('html').send(html);
+  resolve(html);
   });
-
-  return front;
 }
