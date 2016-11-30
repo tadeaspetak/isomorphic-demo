@@ -1,10 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {getTranslations, addTranslation, deleteTranslation} from '../actions/translationsActions';
-import classnames from 'classnames';
-import nprogress from 'nprogress';
 import { OrderedMap } from 'immutable';
 
+import React from 'react';
+import { connect } from 'react-redux';
+
+import {getTranslations, addTranslation, deleteTranslation} from '../actions/translationsActions';
 import { needs } from '../utils';
 
 @connect(state => ({translations: state.translations}))
