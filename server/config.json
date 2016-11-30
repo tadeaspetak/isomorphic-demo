@@ -1,0 +1,16 @@
+{
+  "prod": {
+    "username": "tadeas",
+    "password": "tadeas",
+    "database": "isomorphic_demo",
+    "dialect": "postgres",
+    "port": 5432
+  },
+  "dev": {
+    "username": "tadeas",
+    "password": "tadeas",
+    "database": "isomorphic_demo",
+    "dialect": "postgres",
+    "port": 5432
+  }
+}

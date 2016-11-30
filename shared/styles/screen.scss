@@ -1,0 +1,152 @@
+@import 'fonts';
+
+@import 'common';
+@import 'header';
+@import 'footer';
+
+* {
+  box-sizing: border-box;
+}
+//this needs to be done in order for flexbox to work (sticky footer)
+#app,
+#app > div,
+body,
+html {
+  height: 100%;
+  min-height: 100%;
+}
+html {
+  font-size: 11pt;
+}
+body {
+  background: #fff;
+  color: #404040;
+  font: 1em/1.4 "Merriweather", sans-serif;
+  margin: 0;
+}
+div.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+input,
+textarea,
+button {
+  color: #555;
+  font: 1em/1.4 "Merriweather", sans-serif;
+}
+p {
+  margin: 0 0 1em;
+  text-align: justify;
+}
+img {
+  max-width: 100%;
+}
+a {
+  color: #c52525;
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+// buttons
+a.button,
+button {
+  background: #666;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  color: #eee;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1em;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  &[disabled] {
+    color: #b0b0b0;
+    cursor: not-allowed;
+  }
+  &:focus {
+    outline: 1px dotted #505050;
+  }
+  &.button-green {
+    color: white;
+    background: #46B980;
+    &[disabled] {
+      color: white;
+      background: #95eac0;
+    }
+    &:focus{
+      outline: 1px dotted #378a61;
+    }
+  }
+  &.button-blue {
+    color: white;
+    background: #00ACED;
+  }
+  &.button-block {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+  i.fa {
+    font-size: .9em;
+    margin-right: 6px;
+  }
+}
+// add to elements if they are to be hidden
+.hidden {
+  display: none !important;
+}
+// server responses (typically shown below the related form)
+.server-response {
+  font-style: italic;
+  margin: 1em 0 0;
+  &.success {
+    color: #3aaf75;
+  }
+  &.error {
+    color: #e24141;
+  }
+}
+// contact form
+.contact {
+  input,
+  textarea {
+    margin-bottom: 0.5rem;
+  }
+}
+//content
+main {
+  flex: 1 0 auto;
+  margin-bottom: 2em;
+  padding: 0;
+  .container {
+
+  }
+}
+
+h1{
+  font-size: 1.5rem;
+}
+
+@import 'translations';
+
+@media (min-width: $screen-medium) {
+  a.button,
+  button {
+    font-size: 0.9rem;
+  }
+  .container {
+    padding: 0;
+    margin: 0 auto;
+    width: 720px;
+  }
+}
+//fix font size on iphone
+@media screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none;
+  }
+}

@@ -1,0 +1,14 @@
+@import 'common';
+footer {
+  @include clearfix();
+  color: #999;
+  flex: none;
+  margin: 1rem 0 0;
+  width: 100%;
+  .container {
+    border-top: 1px solid #ccc;
+    font-style: italic;
+    padding: 1rem 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,76 @@
+main.translations {
+  .container {
+    form {
+      margin: 0 0 4rem;
+      textarea.expression1,
+      textarea.expression2 {
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        display: inline-block;
+        height: 8rem;
+        margin: 0 0 0.5rem;
+        padding: 0.5em;
+        resize: vertical;
+        width: 49%;
+
+        &.expression1 {
+          margin-right: 2%;
+        }
+      }
+    }
+
+    h2{
+      margin: 0 0 1rem;
+    }
+    .translations-existing {
+      .translations-header {
+        border-bottom: 1px dotted #ccc;
+        font-weight: bold;
+        margin: 0 0 1rem;
+        padding: 1rem 0;
+
+        .translation-language {
+          display: inline-block;
+          margin: 0 2% 0 0;
+          width: 49%;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .translation {
+        border-bottom: 1px dotted #ccc;
+        margin: 0 0 1rem;
+        padding: 0 0 1rem;
+        position: relative;
+
+        .translation-delete{
+          color: #999;
+          cursor: pointer;
+          display:none;
+          position: absolute;
+          right: 5px;
+          top: -10px;
+        }
+
+        &:hover{
+          .translation-delete{
+            display: inline-block;
+          }
+        }
+
+        .translation-expression {
+          display: inline-block;
+          margin: 0 2% 0 0;
+          width: 49%;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

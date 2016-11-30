@@ -1,0 +1,12 @@
+$screen-tiny: 320px;
+$screen-small: 480px;
+$screen-medium: 768px;
+$screen-large: 1224px;
+
+@mixin clearfix {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
