@@ -18,6 +18,7 @@ export default function(){
   front.get('/*', (req, res) => {
     const history = createMemoryHistory(req.url);
     const store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
+    process.env.HOST = req.get('host');
 
     match({routes, location: req.url, history}, (err, redirect, props) => {
       if (err) {
@@ -29,7 +30,8 @@ export default function(){
         return res.status(404).end('Not found');
       }
 
-      renderPage(props, store)
+      fetchComponentData(props, store)
+        .then(() => renderPage(props, store))
         .then(html => res.type('html').send(html))
         .catch(error => {
           console.log(error);
@@ -72,4 +74,16 @@ function renderPage(props, store){
 
   resolve(html);
   });
+}
+
+function fetchComponentData(props, store) {
+  const needs = props.components.reduce((previous, component) => {
+    return (component.needs || []).map(need => need(props))
+      .concat(((component.WrappedComponent ? component.WrappedComponent.needs : []) || []).map(need => need(props)))
+      .concat(previous);
+  }, []);
+
+  return Promise.all(needs.map(need =>
+    store.dispatch(need).catch(error => console.log(error))
+  ));
 }
