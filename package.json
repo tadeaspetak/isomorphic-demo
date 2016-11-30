@@ -4,9 +4,9 @@
   "description": "Demo of an isomorphic app.",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=prod webpack -p --progress --color",
+    "build": "NODE_ENV=production webpack -p --progress --color",
     "dev": "NODE_ENV=dev node .",
-    "prod": "NODE_ENV=prod node .",
+    "prod": "NODE_ENV=production node .",
     "bprod": "npm run build && npm run prod"
   },
   "repository": {
