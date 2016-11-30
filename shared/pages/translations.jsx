@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {getTranslations, addTranslation, deleteTranslation} from '../actions/translationsActions';
-//import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 import classnames from 'classnames';
 import nprogress from 'nprogress';
 import { OrderedMap } from 'immutable';
@@ -35,6 +35,14 @@ export default class Translations extends React.Component {
   render() {
     return (
       <main className="translations">
+        <Helmet
+          title="Translations"
+          meta={[
+            {property: "og:type", content: "article"},
+            {property: "og:title", content: "Translations"},
+            {property: "og:description", content: "Translations from Swedish to English."}
+          ]}/>
+
         <div className="container">
           <h1>Add a new translation</h1>
 

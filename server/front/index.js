@@ -4,6 +4,7 @@ import {createMemoryHistory} from 'history';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router';
+import Helmet from 'react-helmet';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
 
@@ -44,6 +45,7 @@ export default function(){
 function renderPage(props, store){
   return new Promise((resolve, reject) => {
     let app = renderToString((<Provider store={store}><RouterContext {...props}/></Provider>));
+    let helmet = Helmet.rewind();
     let html = `<!doctype html>
     <html>
       <head>
@@ -56,8 +58,10 @@ function renderPage(props, store){
         <meta name="author" content="Tadeáš Peták">
         <meta name="contact" content="tadeaspetak@gmail.com">
 
+        ${helmet.meta.toString()}
+        ${helmet.title.toString()}
+
         <link rel="icon" type="image/png" href="/media/favicon.ico">
-        <title>Isomorphic Demo</title>
         ${process.env.NODE_ENV === 'prod' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
       </head>
       <body>
