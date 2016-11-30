@@ -18,7 +18,7 @@ export default function(){
 
         <link rel="icon" type="image/png" href="/media/favicon.ico">
         <title>Isomorphic Demo</title>
-        ${process.env.NODE_ENV === 'prod' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
+        ${process.env.NODE_ENV === 'production' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
       </head>
       <body>
         <div id="app"><div></div></div>
