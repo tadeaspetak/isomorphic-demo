@@ -65,7 +65,7 @@ function renderPage(props, store){
         ${helmet.title.toString()}
 
         <link rel="icon" type="image/png" href="/media/favicon.ico">
-        ${process.env.NODE_ENV === 'prod' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
+        ${process.env.NODE_ENV === 'production' ? '<link rel="stylesheet" type="text/css" href="/screen.css">' : ''}
 
         <script type="application/javascript">
           window.state = ${transit.toJSON(store.getState())};
