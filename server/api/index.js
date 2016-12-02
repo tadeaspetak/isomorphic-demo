@@ -38,14 +38,14 @@ export default function() {
       });
   });
 
+  let formParser = bodyParser.urlencoded({ extended: false })
+  api.post('/translations-form', formParser, (req, res) => {
+    saveTranslation(req.body.expression1, req.body.expression2)
+      .then(() => res.redirect(req.header('Referer')));
+  });
+
   api.post('/translations', (req, res) => {
-    let translation = {
-      language1Id: 1,
-      language2Id: 2,
-      expression1: req.body.expression1,
-      expression2: req.body.expression2
-    };
-    db.Translation.create(translation)
+    saveTranslation(req.body.expression1, req.body.expression2)
       .then(translation => getTranslations())
       .then(translations => res.send({translations}))
       .catch(db.Sequelize.ValidationError, error => {
@@ -53,6 +53,16 @@ export default function() {
         getTranslations().then(translations => res.send({translations}));
       });
   });
+
+  let saveTranslation = (e1, e2) => {
+    let translation = {
+      language1Id: 1,
+      language2Id: 2,
+      expression1: e1,
+      expression2: e2
+    };
+    return db.Translation.create(translation);
+  }
 
   return api;
 }

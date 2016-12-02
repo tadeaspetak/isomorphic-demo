@@ -45,10 +45,10 @@ export default class Translations extends React.Component {
         <div className="container">
           <h1>Add a new translation</h1>
 
-          <form onSubmit={this.handleSubmitTranslation.bind(this)}>
-            <textarea className="expression1" placeholder="Mening eller uttryck på svenska"
+          <form method="POST" action="/api/v1/translations-form" onSubmit={this.handleSubmitTranslation.bind(this)}>
+            <textarea className="expression1" name="expression1" placeholder="Mening eller uttryck på svenska"
               value={this.state.message} onChange={e => this.setState({expression1: e.target.value})}></textarea>
-            <textarea className="expression2" placeholder="Sentence or expression in English"
+            <textarea className="expression2" name="expression2" placeholder="Sentence or expression in English"
               value={this.state.message} onChange={e => this.setState({expression2: e.target.value})}></textarea>
             <button type="submit" className="button-block"><i className="fa fa-send"></i> Save</button>
           </form>
