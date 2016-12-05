@@ -40,12 +40,12 @@ export default function() {
 
   let formParser = bodyParser.urlencoded({ extended: false })
   api.post('/translations-form', formParser, (req, res) => {
-    saveTranslation(req.body.expression1, req.body.expression2)
+    saveTranslation(req.body.language1Id, req.body.language2Id, req.body.expression1, req.body.expression2)
       .then(() => res.redirect(req.header('Referer')));
   });
 
   api.post('/translations', (req, res) => {
-    saveTranslation(req.body.expression1, req.body.expression2)
+    saveTranslation(req.body.language1Id, req.body.language2Id, req.body.expression1, req.body.expression2)
       .then(translation => getTranslations())
       .then(translations => res.send({translations}))
       .catch(db.Sequelize.ValidationError, error => {
@@ -54,14 +54,13 @@ export default function() {
       });
   });
 
-  let saveTranslation = (e1, e2) => {
-    let translation = {
-      language1Id: 1,
-      language2Id: 2,
+  let saveTranslation = (l1, l2, e1, e2) => {
+    return db.Translation.create({
+      language1Id: l1,
+      language2Id: l2,
       expression1: e1,
       expression2: e2
-    };
-    return db.Translation.create(translation);
+    });
   }
 
   return api;
