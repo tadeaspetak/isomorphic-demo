@@ -40,8 +40,8 @@ export default function() {
 
   api.post('/translations', (req, res) => {
     let translation = {
-      language1Id: 1,
-      language2Id: 2,
+      language1Id: req.body.language1Id,
+      language2Id: req.body.language2Id,
       expression1: req.body.expression1,
       expression2: req.body.expression2
     };
